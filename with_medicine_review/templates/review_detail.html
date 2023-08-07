@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>Review_Detail</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Review_Detail</h1>
+    <hr>
+    <h3>{{ review_board.title }}</h3>
+    <p>{{ review_board.pub_date }}</p>
+    <p>{{ review_board.body }}</p>
+    <br>
+    <a href="{% url 'review_update' review_board.id %}">글 수정하기</a>
+    <br>
+    <a href="{% url 'review_delete' review_board.id %}">글 삭제하기</a>
+
+    {% for comment in review_board.comment.all %}
+    <p>댓글:{{ comment }}</p>
+    <br>
+    <a href="{% url 'review_comment_delete' review_board.id comment.id %}">댓글 삭제하기</a>
+    <a href="{% url 'review_comment_update' review_board.id comment.id %}">댓글 수정하기</a>
+    {% endfor %}
+ 
+    <form method = "POST" action = "{% url 'review_detail' review_board.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type = "submit">작성</button>
+    </form>
+
+{% endblock %}

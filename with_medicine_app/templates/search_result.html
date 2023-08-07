@@ -1,0 +1,14 @@
+{% comment %} {% extends 'main.html' %}
+
+{% block title %}
+    <title>Search_Result</title>
+{% endblock %}
+
+{% block content %}
+<h1>Search Results for "{{ query }}"</h1>
+<ul>
+  {% for item in items %}
+    <li>{{ item.title }}</li>
+  {% endfor %}
+</ul>
+{% endblock %} {% endcomment %}

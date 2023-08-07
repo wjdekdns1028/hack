@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>Free_create</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Free_create Page</h1>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type = "submit">작성</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block title %}
+    <title>Free_Detail</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Free_Detail</h1>
+    <hr>
+    <h3>{{ free_board.title }}</h3>
+    <p>{{ free_board.pub_date }}</p>
+    <p>{{ free_board.body }}</p>
+    <br>
+    <a href="{% url 'free_update' free_board.id %}">글 수정하기</a>
+    <br>
+    <a href="{% url 'free_delete' free_board.id %}">글 삭제하기</a>
+
+{% for comment in free_board.comment.all %}
+    <p>댓글:{{ comment }}</p>
+    <br>
+    <a href="{% url 'free_comment_delete' free_board.id comment.id %}">댓글 삭제하기</a>
+    <a href="{% url 'free_comment_update' free_board.id comment.id %}">댓글 수정하기</a>
+    {% endfor %}
+ 
+<form method = "POST" action = "{% url 'free_detail' free_board.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type = "submit">작성</button>
+</form>
+
+{% endblock %}
